@@ -17,32 +17,45 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h1>Szkoła Podstawowa nr. 3</h1>
+                        <h1> {{ schoolName }}</h1>
                         <h4>
-                            <strong>Rok załozenia</strong>: 1970
+                            <strong>Rok załozenia</strong>: 
+                            {{ foundationYear }}
                         </h4>
                         <p>
-                            <strong>Liczba uczniów:</strong> 1
+                            <strong>Liczba uczniów:</strong> {{ studentsCount }}
                         </p>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="list-group">
-                            <div class="list-group-item">
-                                <label class="absent">
-                                    <input type="checkbox">
-                                    Jacek Kowalski
-                                </label> | 
-                                <button>Wypisz</button>
-                            </div>
+                            <!-- 
+                                    T nie zostało omówione na szkoleniu ale stwierdziłem że warto dokończyć skrypt aby komponent działał dokłądnie tak jak wcześniejszy listing
+                                    "@delete" jest to shorthand od v-on:, które odpowiada za nasłuchiwanei zdarzeń. W tym wypadku nasłuchujemy zdarzenia "delete", które jest emitowane w kmponencie studenta (student.js)
+                                    Więcej poczytac można o tym tutaj: https://vuejs.org/v2/guide/components.html#Custom-Events. Jest to jednak treść dodatkowa i zostanie od zera poruszona na kolejnym szkoleniu, tutaj wrzucam jako zajawkę.
+                                -->
+                            <student @delete="deleteStudent($event)" v-for="(s, index) in students" :s="s" :index="index" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script type="text/x-template" id="student-template">
+        <div class="list-group-item">
+            <label :class="{ present : s.isPresent, absent : !s.isPresent }">
+                <input type="checkbox" v-model="s.isPresent">
+                    {{ index }} {{ s.firstName }} {{ s.lastName }}
+                </label> | 
+                <!-- 
+                Przy kliknięciu wywoływana jest metoda deleteStudent(id), która emituje zdarzenie delete do root scopea (głównej instancji vue w pliku app.js). W parametrze zdarzenai podawane jest id studenat do usunięcia
+                !-->
+            <button v-show="!s.isPresent" @click="deleteStudent(index)">Wypisz</button>
+        </div>
+    </script>
+
     <script src="./student.js"></script>
     <script src="./app.js"></script>
     </body>
