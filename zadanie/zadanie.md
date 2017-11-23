@@ -1,6 +1,6 @@
 # Zadanie domowe
 
-1. Przerób plik index.html z listą zwierząt afrykańskich na interaktywna aplikacje Vue.js gdzie zarówno tytuł strony jak i lista zwierząt bedą pobierane z instancji Vue. 
+1. Przerób plik index.html z listą zwierząt na interaktywna aplikacje Vue.js gdzie zarówno tytuł strony jak i lista zwierząt bedą pobierane z instancji Vue. 
 2. Pamietaj o dokładnym odwzorowaniu listy (zauważ, ze parzyste i nieparzyste elementy listy maja rózne klasy css - efekt ten uzyskaj za pomocą Vue, nie dopisujac cssa). 
 3. Każda pozycja z listy powinna byc komponentem (jeden komponent `animal`).
 4. Po kliknięciu na dany komponent z listy powinien on usuwać danego zwierzaka z modelu danych (nie potrzeba tu emitowania eventów, wystarczy zwykła obsługa zdarzenia po kliknięciu na komponent.
