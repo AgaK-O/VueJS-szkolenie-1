@@ -21,31 +21,34 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h1> Atlas zwierząt</h1>
+                        <h1> {{ pageName }}</h1>
                         <p>
-                            <strong>UWAGA: liczba zwierzaków zmalała i wynosi 3<strong>
+                            <strong v-if="animalsCount < 4">UWAGA: liczba zwierzaków zmalała i wynosi {{ animalsCount }} </strong>
                         </p>
                     </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-md-12">
                         <div class="list-group">
-                            <div class="list-group-item odd">
-                                Lew <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg">
-                            </div>
-                            <div class="list-group-item even">
-                                Kot <img src="http://www.catster.com/wp-content/uploads/2017/06/small-kitten-meowing.jpg">
-                            </div>
-                            <div class="list-group-item odd">
-                                Pies <img src="https://s7d2.scene7.com/is/image/PetSmart/PB1201_STORY_CARO-Authority-HealthyOutside-DOG-20160818?$PB1201$">
-                            </div>
-                            <div class="list-group-item even">
-                                Zebra <img src="https://a-z-animals.com/media/animals/images/470x370/zebra_8.jpg">
-                            </div>
+                            <!--<div class="list-group-item" :class="{ odd : !a.even, even : a.even }" v-for="a in animals">-->
+                                <!--{{ a.name }} <img v-bind:src="a.imgSrc">-->
+                            <!--</div>-->
+                            <!---->
+                            <animal @delete="deleteAnimal($event)" v-for="(a, index) in animals" :a="a" :index="index" />
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/x-template" id="animal-template">
+            <div @click="deleteAnimal(index)" class="list-group-item" :class="{ odd : !a.even, even : a.even }" >
+                {{ a.name }} <img v-bind:src="a.imgSrc">
+            </div>
+    </script>
+    <script src="./animal.js"></script>
+    <script src="./app.js"></script>
     </body>
 </html>
