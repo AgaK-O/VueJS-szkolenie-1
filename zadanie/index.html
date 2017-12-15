@@ -44,7 +44,7 @@
         </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script type="text/x-template" id="animal-template">
-            <div @click="deleteAnimal(index)" class="list-group-item" :class="{ odd : !a.even, even : a.even }" >
+            <div @click="deleteAnimal(index)" class="list-group-item" :class="{ odd : index%2 !== 0, even : index%2 === 0 }" >
                 {{ a.name }} <img v-bind:src="a.imgSrc">
             </div>
     </script>
